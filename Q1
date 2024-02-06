@@ -1,0 +1,37 @@
+#include <iostream>
+using namespace std;
+
+// Function to count occurrences of S1 in S2
+int countSubstringOccurrences(const char* S1, const char* S2) {
+    int count = 0;
+    // Iterate through each character in S2
+    for (int i = 0; S2[i] != '\0'; i++) {
+        int j = 0;
+        // Check if S1 is a substring starting at the current position in S2
+        while (S1[j] != '\0' && S2[i + j] != '\0' && S1[j] == S2[i + j]) {
+            j++;
+        }
+        // If the entire S1 is found in S2, increment the count
+        if (S1[j] == '\0') {
+            count++;
+        }
+    }
+    return count;
+}
+
+int main() {
+    const int maxSize = 100; // Maximum size of strings
+    char S1[maxSize], S2[maxSize];
+    // Input the first string S1
+    cout << "Enter the first string (S1): ";
+    cin.getline(S1, maxSize);
+    // Input the second string S2
+    cout << "Enter the second string (S2): ";
+    cin.getline(S2, maxSize);
+
+    // Call the function to count occurrences of S1 in S2
+    int occurrences = countSubstringOccurrences(S1, S2);
+    // Display the result
+    cout << "Number of occurrences of S1 in S2: " << occurrences << std::endl;
+    return 0;
+}

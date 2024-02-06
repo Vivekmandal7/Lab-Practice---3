@@ -1,0 +1,51 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+// Function to swap two integers
+void swap(int& a, int& b) {
+    int temp = a;
+    a = b;
+    b = temp;
+}
+
+// Function to arrange array elements according to the absolute difference with z
+void dist_sort(int z, int x[], int n) {
+    // Calculate absolute difference for each element and store in a separate array
+    int diffArr[n];
+    for (int i = 0; i < n; i++) {
+        diffArr[i] = abs(z - x[i]);
+    }
+    // Bubble sort to arrange elements based on the absolute difference
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (diffArr[j] > diffArr[j + 1] || (diffArr[j] == diffArr[j + 1] && x[j] > x[j + 1])) {
+                // Swap the elements in both arrays
+                swap(diffArr[j], diffArr[j + 1]);
+                swap(x[j], x[j + 1]);
+            }
+        }
+    }
+}
+
+int main() {
+    int z;
+    cout << "Enter the value of z: ";
+    cin >> z;
+    int n;
+    cout << "Enter the number of elements in the array: ";
+    cin >> n;
+    int x[n];
+    cout << "Enter the elements of the array: ";
+    for (int i = 0; i < n; i++) {
+        cin >> x[i];
+    }
+    // Call the function to arrange elements by absolute difference with z
+    dist_sort(z, x, n);
+    // Display the sorted array
+    cout << "Sorted array based on absolute difference with " << z << ": ";
+    for (int i = 0; i < n; i++) {
+        cout << x[i] << " ";
+    }
+    return 0;
+}
